@@ -67,6 +67,62 @@
                  opacity: 0.85;
              }
 
+             .search-popup .search-outer {
+                 align-items: flex-start;
+             }
+             .search-popup .search-outer input {
+                 width: 100%;
+             }
+             .local-search-hint {
+                 font-size: 13px;
+                 opacity: 0.75;
+                 margin-top: 10px;
+             }
+             .local-search-results {
+                 margin-top: 18px;
+                 max-height: 55vh;
+                 overflow: auto;
+                 padding-right: 6px;
+             }
+             .local-search-item {
+                 display: block;
+                 padding: 14px 14px;
+                 border: 1px solid rgba(0,0,0,0.06);
+                 border-radius: 14px;
+                 background: #ffffff;
+                 text-decoration: none;
+                 margin-bottom: 10px;
+                 transition: transform 120ms ease, box-shadow 120ms ease;
+             }
+             .local-search-item:hover {
+                 transform: translateY(-1px);
+                 box-shadow: 0 14px 30px rgba(0,0,0,0.08);
+             }
+             .local-search-item-title {
+                 font-weight: 700;
+                 color: #1a1a1a;
+                 margin: 0 0 6px 0;
+                 line-height: 1.2;
+             }
+             .local-search-item-snippet {
+                 margin: 0;
+                 opacity: 0.85;
+                 color: #444;
+                 line-height: 1.5;
+             }
+             .local-search-item-snippet mark {
+                 background: rgba(250, 162, 146, 0.35);
+                 padding: 0 2px;
+                 border-radius: 4px;
+             }
+             .local-search-empty {
+                 padding: 16px;
+                 border-radius: 14px;
+                 background: rgba(255,255,255,0.7);
+                 border: 1px dashed rgba(0,0,0,0.12);
+                 opacity: 0.85;
+             }
+
              .whatsapp-float {
                  position: fixed;
                 left: 20px;
@@ -145,13 +201,13 @@
                                  </div>
                              </div>   
                             <div class="col-xl-2 col-lg-2 text-right d-none d-xl-block mt-30 mb-30">
-                                <div class="search-top2">
-                                   <ul>
-                                       
-                                        <li><a href="index.html#"><i class="fas fa-search"></i></a></li>
-                                        <li><a href="index.html#" class="menu-tigger"><i class="fal fa-bars"></i></a></li>
-                                    </ul>
-                                </div>
+                                 <div class="search-top2">
+                                    <ul>
+                                        
+                                         <li><a href="#" data-toggle="modal" data-target=".popup1" aria-label="Buscar"><i class="fas fa-search"></i></a></li>
+                                         <li><a href="index.html#" class="menu-tigger"><i class="fal fa-bars"></i></a></li>
+                                     </ul>
+                                 </div>
                             </div>
                           
                             
@@ -202,11 +258,19 @@
 			<div class="modal-dialog modal-lg" role="document">
 				<div class="modal-content search-popup">
 					<div class="text-center">
-						<a href="index.html#" class="close2" data-dismiss="modal" aria-label="Close">× close</a>
+						<a href="#" class="close2" data-dismiss="modal" aria-label="Close">× cerrar</a>
 					</div>
 					<div class="row search-outer">
-						<div class="col-md-11"><input type="text" placeholder="Search for products..." /></div>
-						<div class="col-md-1 text-right"><a href="index.html#"><i class="fa fa-search" aria-hidden="true"></i></a></div>
+						<div class="col-md-11">
+							<input type="text" id="local-search-input" placeholder="Buscar: novia signature, peinado, body glow..." autocomplete="off" aria-label="Buscar en esta pagina" />
+							<div class="local-search-hint">Tip: escribe 2-3 palabras clave. Presiona Enter para abrir el primer resultado.</div>
+							<div id="local-search-results" class="local-search-results" aria-live="polite" aria-label="Resultados de busqueda"></div>
+						</div>
+						<div class="col-md-1 text-right">
+							<button type="button" id="local-search-btn" style="background:transparent;border:0;padding:0;" aria-label="Buscar">
+								<i class="fa fa-search" aria-hidden="true"></i>
+							</button>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -261,7 +325,7 @@
                         </div>
                     </div>
 
-                    <div class="row align-items-center mb-60">
+						<div class="row align-items-center mb-60" id="novia-essence">
                         <div class="col-lg-6 col-md-12 col-sm-12 pr-30">
                             <div class="s-about-img p-relative wow fadeInLeft animated" data-animation="fadeInLeft" data-delay=".2s">
                                 <img src="img/features/about_img.png" alt="Novia Essence">
@@ -297,7 +361,7 @@
                         </div>
                     </div>
 
-                    <div class="row align-items-center mb-60">
+						<div class="row align-items-center mb-60" id="novia-clasica">
                         <div class="col-lg-6 col-md-12 col-sm-12 order-lg-2 pl-30">
                             <div class="s-about-img p-relative wow fadeInRight animated" data-animation="fadeInRight" data-delay=".2s">
                                 <img src="img/blog/blog_img01.png" alt="Novia Clasica">
@@ -332,7 +396,7 @@
                         </div>
                     </div>
 
-                    <div class="row align-items-center mb-60">
+						<div class="row align-items-center mb-60" id="novia-signature">
                         <div class="col-lg-6 col-md-12 col-sm-12 pr-30">
                             <div class="s-about-img p-relative wow fadeInLeft animated" data-animation="fadeInLeft" data-delay=".2s">
                                 <img src="img/blog/blog_img02.png" alt="Novia Signature">
@@ -370,7 +434,7 @@
                         </div>
                     </div>
 
-                    <div class="row align-items-center mb-60">
+						<div class="row align-items-center mb-60" id="novia-luxe">
                         <div class="col-lg-6 col-md-12 col-sm-12 order-lg-2 pl-30">
                             <div class="s-about-img p-relative wow fadeInRight animated" data-animation="fadeInRight" data-delay=".2s">
                                 <img src="img/blog/blog_img03.png" alt="Novia Luxe">
@@ -408,7 +472,7 @@
                         </div>
                     </div>
 
-                    <div class="row align-items-center">
+						<div class="row align-items-center" id="novia-royal">
                         <div class="col-lg-6 col-md-12 col-sm-12 pr-30">
                             <div class="s-about-img p-relative wow fadeInLeft animated" data-animation="fadeInLeft" data-delay=".2s">
                                 <img src="img/slider/slider_img05.png" alt="Novia Royal">
@@ -1151,5 +1215,277 @@
         <script src="js/jquery.magnific-popup.min.js"></script>
         <script src="js/element-in-view.js"></script>
         <script src="js/main.js"></script>
+
+        <script>
+            (function () {
+                var input = document.getElementById('local-search-input');
+                var resultsEl = document.getElementById('local-search-results');
+                var btn = document.getElementById('local-search-btn');
+                if (!input || !resultsEl) return;
+
+                var STOP = {
+                    'de': true, 'la': true, 'el': true, 'los': true, 'las': true, 'y': true, 'o': true,
+                    'para': true, 'con': true, 'sin': true, 'un': true, 'una': true, 'en': true, 'por': true,
+                    'del': true, 'al': true, 'que': true, 'tu': true, 'mi': true
+                };
+
+                function stripDiacritics(s) {
+                    if (!s) return '';
+                    try {
+                        return s.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+                    } catch (e) {
+                        return s;
+                    }
+                }
+
+                function norm(s) {
+                    return stripDiacritics(String(s)).toLowerCase();
+                }
+
+                function tokenize(q) {
+                    var parts = norm(q).split(/[^a-z0-9]+/g);
+                    var out = [];
+                    for (var i = 0; i < parts.length; i++) {
+                        var t = parts[i];
+                        if (!t || t.length < 2) continue;
+                        if (STOP[t]) continue;
+                        out.push(t);
+                    }
+                    return out;
+                }
+
+                function textFrom(el) {
+                    if (!el) return '';
+                    var nodes = el.querySelectorAll('h1,h2,h3,h4,h5,h6,p,li');
+                    var txt = '';
+                    for (var i = 0; i < nodes.length; i++) {
+                        var t = nodes[i].textContent || '';
+                        t = t.replace(/\s+/g, ' ').trim();
+                        if (!t) continue;
+                        txt += (txt ? ' ' : '') + t;
+                    }
+                    return txt;
+                }
+
+                function firstTitle(el) {
+                    if (!el) return '';
+                    var h = el.querySelector('h2,h3,h4,h5,h6');
+                    return h ? (h.textContent || '').replace(/\s+/g, ' ').trim() : '';
+                }
+
+                function escapeHtml(s) {
+                    return String(s)
+                        .replace(/&/g, '&amp;')
+                        .replace(/</g, '&lt;')
+                        .replace(/>/g, '&gt;')
+                        .replace(/"/g, '&quot;')
+                        .replace(/'/g, '&#39;');
+                }
+
+                function escapeRegExp(s) {
+                    return String(s).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                }
+
+                var index = null;
+                function buildIndex() {
+                    var items = [];
+
+                    var main = document.querySelector('main');
+                    if (main) {
+                        var sections = main.querySelectorAll('section[id]');
+                        for (var i = 0; i < sections.length; i++) {
+                            var sec = sections[i];
+                            var id = sec.getAttribute('id');
+                            if (!id) continue;
+                            var title = firstTitle(sec) || id;
+                            var txt = textFrom(sec);
+                            if (!txt) continue;
+                            items.push({
+                                id: id,
+                                url: '#' + id,
+                                title: title,
+                                text: txt,
+                                nTitle: norm(title),
+                                nText: norm(txt)
+                            });
+                        }
+                    }
+
+                    var packs = document.querySelectorAll('#novias [id^="novia-"]');
+                    for (var j = 0; j < packs.length; j++) {
+                        var pack = packs[j];
+                        var pid = pack.getAttribute('id');
+                        if (!pid) continue;
+                        var ptitle = firstTitle(pack) || pid;
+                        var ptxt = textFrom(pack);
+                        if (!ptxt) continue;
+                        items.push({
+                            id: pid,
+                            url: '#' + pid,
+                            title: ptitle,
+                            text: ptxt,
+                            nTitle: norm(ptitle),
+                            nText: norm(ptxt)
+                        });
+                    }
+
+                    index = items;
+                }
+
+                function countOccurrences(hay, needle) {
+                    var count = 0;
+                    var pos = 0;
+                    while (true) {
+                        var idx = hay.indexOf(needle, pos);
+                        if (idx === -1) break;
+                        count++;
+                        pos = idx + needle.length;
+                    }
+                    return count;
+                }
+
+                function snippetFor(record, tokens) {
+                    var plain = (record.text || '').replace(/\s+/g, ' ').trim();
+                    if (!plain) return '';
+                    var nPlain = norm(plain);
+
+                    var hitAt = -1;
+                    var hitToken = '';
+                    for (var i = 0; i < tokens.length; i++) {
+                        var t = tokens[i];
+                        var at = nPlain.indexOf(t);
+                        if (at !== -1 && (hitAt === -1 || at < hitAt)) {
+                            hitAt = at;
+                            hitToken = t;
+                        }
+                    }
+
+                    var start = 0;
+                    if (hitAt !== -1) start = Math.max(0, hitAt - 70);
+                    var end = Math.min(plain.length, start + 170);
+                    var snip = plain.slice(start, end);
+                    if (start > 0) snip = '... ' + snip;
+                    if (end < plain.length) snip = snip + ' ...';
+
+                    // Best-effort highlight (accent-insensitive matching is handled by ranking, not highlighting)
+                    for (var j = 0; j < tokens.length; j++) {
+                        var re = new RegExp('(' + escapeRegExp(tokens[j]) + ')', 'ig');
+                        snip = snip.replace(re, '<mark>$1</mark>');
+                    }
+                    return snip;
+                }
+
+                function render(results, tokens) {
+                    if (!results.length) {
+                        resultsEl.innerHTML = '<div class="local-search-empty">Sin resultados. Prueba con "novia", "peinado", "signature" o "body glow".</div>';
+                        return;
+                    }
+
+                    var html = '';
+                    for (var i = 0; i < results.length; i++) {
+                        var r = results[i];
+                        html +=
+                            '<a class="local-search-item" href="' + escapeHtml(r.url) + '" data-dismiss="modal">' +
+                                '<div class="local-search-item-title">' + escapeHtml(r.title) + '</div>' +
+                                '<p class="local-search-item-snippet">' + snippetFor(r, tokens) + '</p>' +
+                            '</a>';
+                    }
+                    resultsEl.innerHTML = html;
+                }
+
+                function search(q) {
+                    if (!index) buildIndex();
+
+                    var tokens = tokenize(q);
+                    if (!tokens.length) {
+                        resultsEl.innerHTML = '';
+                        return { tokens: tokens, results: [] };
+                    }
+
+                    var hits = [];
+                    for (var i = 0; i < index.length; i++) {
+                        var it = index[i];
+                        var ok = true;
+                        var score = 0;
+                        for (var t = 0; t < tokens.length; t++) {
+                            var token = tokens[t];
+                            var inTitle = it.nTitle.indexOf(token) !== -1;
+                            var inText = it.nText.indexOf(token) !== -1;
+                            if (!inTitle && !inText) {
+                                ok = false;
+                                break;
+                            }
+                            if (inTitle) score += 20;
+                            if (inText) score += 10;
+                            score += countOccurrences(it.nText, token);
+                        }
+                        if (!ok) continue;
+                        hits.push({
+                            id: it.id,
+                            url: it.url,
+                            title: it.title,
+                            text: it.text,
+                            nTitle: it.nTitle,
+                            nText: it.nText,
+                            score: score
+                        });
+                    }
+
+                    hits.sort(function (a, b) {
+                        return b.score - a.score;
+                    });
+
+                    var top = hits.slice(0, 10);
+                    render(top, tokens);
+                    return { tokens: tokens, results: top };
+                }
+
+                var last = { tokens: [], results: [] };
+                var timer = null;
+                function onType() {
+                    if (timer) clearTimeout(timer);
+                    timer = setTimeout(function () {
+                        last = search(input.value);
+                    }, 120);
+                }
+
+                input.addEventListener('input', onType);
+                input.addEventListener('keydown', function (e) {
+                    var key = e.key || e.keyCode;
+                    var isEnter = key === 'Enter' || key === 13;
+                    if (!isEnter) return;
+                    if (last && last.results && last.results.length) {
+                        window.location.hash = '#' + last.results[0].id;
+                        if (window.jQuery && window.jQuery('.popup1').modal) {
+                            window.jQuery('.popup1').modal('hide');
+                        }
+                    }
+                });
+
+                if (btn) {
+                    btn.addEventListener('click', function () {
+                        input.focus();
+                        last = search(input.value);
+                    });
+                }
+
+                // Focus when modal opens (Bootstrap)
+                if (window.jQuery) {
+                    window.jQuery('.popup1').on('shown.bs.modal', function () {
+                        setTimeout(function () {
+                            input.focus();
+                            input.select();
+                        }, 0);
+                    });
+                }
+
+                // Build index early to keep first search snappy
+                if (document.readyState === 'complete' || document.readyState === 'interactive') {
+                    buildIndex();
+                } else {
+                    document.addEventListener('DOMContentLoaded', buildIndex);
+                }
+            })();
+        </script>
     </body>
 </html>
